@@ -40,19 +40,19 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_CLIENT_CALLBACK')
+        'redirect' => env('GOOGLE_CLIENT_CALLBACK'),
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('FACEBOOK_CLIENT_CALLBACK')
+        'redirect' => env('FACEBOOK_CLIENT_CALLBACK'),
     ],
 
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => env('TWITTER_CLIENT_CALLBACK')
+        'redirect' => env('TWITTER_CLIENT_CALLBACK'),
     ],
 
     'oidc' => [
@@ -64,7 +64,7 @@ return [
         'url_authorize' => env('OIDC_URL_AUTHORIZE'),
         'url_access_token' => env('OIDC_URL_ACCESS_TOKEN'),
         'url_resource_owner_details' => env('OIDC_URL_RESOURCE_OWNER_DETAILS'),
-        'scope' => explode(",", env('OIDC_SCOPE')),
+        'scope' => explode(',', env('OIDC_SCOPE')),
     ],
 
 ];

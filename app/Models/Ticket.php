@@ -22,7 +22,7 @@ class Ticket extends Model implements HasMedia
     protected $fillable = [
         'name', 'content', 'owner_id', 'responsible_id',
         'status_id', 'project_id', 'code', 'order', 'type_id',
-        'priority_id', 'estimation', 'epic_id', 'sprint_id'
+        'priority_id', 'estimation', 'epic_id', 'sprint_id',
     ];
 
     public static function boot()
@@ -33,7 +33,7 @@ class Ticket extends Model implements HasMedia
             $project = Project::where('id', $item->project_id)->first();
             $count = Ticket::where('project_id', $project->id)->count();
             $order = $project->tickets?->last()?->order ?? -1;
-            $item->code = $project->ticket_prefix . '-' . ($count + 1);
+            $item->code = $project->ticket_prefix.'-'.($count + 1);
             $item->order = $order + 1;
         });
 
@@ -56,7 +56,7 @@ class Ticket extends Model implements HasMedia
                     'ticket_id' => $item->id,
                     'old_status_id' => $oldStatus,
                     'new_status_id' => $item->status_id,
-                    'user_id' => auth()->user()->id
+                    'user_id' => auth()->user()->id,
                 ]);
                 foreach ($item->watchers as $user) {
                     $user->notify(new TicketStatusUpdated($item));
@@ -65,7 +65,7 @@ class Ticket extends Model implements HasMedia
 
             // Ticket sprint update
             $oldSprint = $old->sprint_id;
-            if ($oldSprint && !$item->sprint_id) {
+            if ($oldSprint && ! $item->sprint_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => null]);
             } elseif ($item->sprint_id && $item->sprint->epic_id) {
                 Ticket::where('id', $item->id)->update(['epic_id' => $item->sprint->epic_id]);
@@ -152,6 +152,7 @@ class Ticket extends Model implements HasMedia
                 if ($this->responsible) {
                     $users->push($this->responsible);
                 }
+
                 return $users->unique('id');
             }
         );
@@ -162,6 +163,7 @@ class Ticket extends Model implements HasMedia
         return new Attribute(
             get: function () {
                 $seconds = $this->hours->sum('value') * 3600;
+
                 return CarbonInterval::seconds($seconds)->cascade()->forHumans();
             }
         );
@@ -198,9 +200,10 @@ class Ticket extends Model implements HasMedia
     {
         return new Attribute(
             get: function () {
-                if (!$this->estimation) {
+                if (! $this->estimation) {
                     return null;
                 }
+
                 return $this->estimation * 3600;
             }
         );
@@ -218,7 +221,7 @@ class Ticket extends Model implements HasMedia
     public function completudePercentage(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->estimationProgress
+            get: fn () => $this->estimationProgress
         );
     }
 }

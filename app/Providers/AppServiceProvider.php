@@ -58,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
         Filament::pushMeta([
             new HtmlString('<link rel="icon"
                                        type="image/x-icon"
-                                       href="' . config('app.logo') . '">'),
+                                       href="'.config('app.logo').'">'),
         ]);
 
         // Register navigation groups
@@ -84,7 +84,7 @@ class AppServiceProvider extends ServiceProvider
             Config::set('filament.brand', $settings->site_name ?? env('APP_NAME'));
             Config::set(
                 'app.logo',
-                $settings->site_logo ? asset('storage/' . $settings->site_logo) : asset('favicon.ico')
+                $settings->site_logo ? asset('storage/'.$settings->site_logo) : asset('favicon.ico')
             );
             Config::set('filament-breezy.enable_registration', $settings->enable_registration ?? false);
             Config::set('filament-socialite.registration', $settings->enable_registration ?? false);

@@ -2,8 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Project;
-use App\Models\Ticket;
 use App\Models\TicketHour;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;

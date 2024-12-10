@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Project;
-use App\Models\Ticket;
 use App\Models\TicketHour;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -38,10 +37,9 @@ class ProjectHoursExport implements FromCollection, WithHeadings
     {
         $collection = collect();
         $this->project->tickets
-            ->filter(fn($ticket) => $ticket->hours()->count())
-            ->each(fn ($ticket) =>
-                $ticket->hours
-                    ->each(fn(TicketHour $item) => $collection->push([
+            ->filter(fn ($ticket) => $ticket->hours()->count())
+            ->each(fn ($ticket) => $ticket->hours
+                    ->each(fn (TicketHour $item) => $collection->push([
                         '#' => $item->ticket->code,
                         'ticket' => $item->ticket->name,
                         'user' => $item->user->name,
@@ -51,6 +49,7 @@ class ProjectHoursExport implements FromCollection, WithHeadings
                         'date' => $item->created_at->format(__('Y-m-d g:i A')),
                     ]))
             );
+
         return $collection;
     }
 }

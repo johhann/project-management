@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\LocaleMiddleware;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
@@ -12,7 +13,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Http\Middleware\LocaleMiddleware;
 
 return [
 
@@ -88,8 +88,7 @@ return [
     'auth' => [
         'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
         'pages' => [
-            'login' =>
-                \JeffGreco13\FilamentBreezy\Http\Livewire\Auth\Login::class,
+            'login' => \JeffGreco13\FilamentBreezy\Http\Livewire\Auth\Login::class,
         ],
     ],
 
@@ -202,12 +201,12 @@ return [
 
     'broadcasting' => [
 
-         'echo' => [
-             'broadcaster' => 'pusher',
-             'key' => env('VITE_PUSHER_APP_KEY'),
-             'cluster' => env('VITE_PUSHER_APP_CLUSTER'),
-             'forceTLS' => true,
-         ],
+        'echo' => [
+            'broadcaster' => 'pusher',
+            'key' => env('VITE_PUSHER_APP_KEY'),
+            'cluster' => env('VITE_PUSHER_APP_CLUSTER'),
+            'forceTLS' => true,
+        ],
 
     ],
 
@@ -318,7 +317,7 @@ return [
     'middleware' => [
         'auth' => [
             Authenticate::class,
-            'verified'
+            'verified',
         ],
         'base' => [
             EncryptCookies::class,
@@ -330,7 +329,7 @@ return [
             SubstituteBindings::class,
             DispatchServingFilamentEvent::class,
             MirrorConfigToSubpackages::class,
-            LocaleMiddleware::class
+            LocaleMiddleware::class,
         ],
     ],
 

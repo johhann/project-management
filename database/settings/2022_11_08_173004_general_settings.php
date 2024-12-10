@@ -6,6 +6,5 @@ class GeneralSettings extends SettingsMigration
 {
     public function up(): void
     {
-
     }
 }

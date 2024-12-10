@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\User;
-use App\Models\Ticket;
-use Illuminate\Support\Facades\Route;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use App\Http\Controllers\RoadMap\DataController;
 use App\Http\Controllers\Auth\OidcAuthController;
+use App\Http\Controllers\RoadMap\DataController;
+use App\Models\Ticket;
+use App\Models\User;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Support\Facades\Route;
 
 // Share ticket
 Route::get('/tickets/share/{ticket:code}', function (Ticket $ticket) {
@@ -19,7 +19,7 @@ Route::get('/validate-account/{user:creation_token}', function (User $user) {
     ->name('validate-account')
     ->middleware([
         'web',
-        DispatchServingFilamentEvent::class
+        DispatchServingFilamentEvent::class,
     ]);
 
 // Login default redirection

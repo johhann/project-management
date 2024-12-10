@@ -13,7 +13,7 @@ class TicketHour extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'ticket_id', 'value', 'comment', 'activity_id'
+        'user_id', 'ticket_id', 'value', 'comment', 'activity_id',
     ];
 
     public function user(): BelongsTo
@@ -36,6 +36,7 @@ class TicketHour extends Model
         return new Attribute(
             get: function () {
                 $seconds = $this->value * 3600;
+
                 return CarbonInterval::seconds($seconds)->cascade()->forHumans();
             }
         );

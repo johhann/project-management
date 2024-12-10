@@ -6,7 +6,7 @@ return [
     'login_form' => [
 
         // Enabled
-        'is_enabled' => true
+        'is_enabled' => true,
 
     ],
 
@@ -102,14 +102,14 @@ return [
                 'list' => [
                     'employee' => 'Employee',
                     'customer' => 'Customer',
-                    'administrator' => 'Administrator'
+                    'administrator' => 'Administrator',
                 ],
 
                 // Roles colors
                 'colors' => [
                     'primary' => 'employee',
                     'warning' => 'customer',
-                    'danger' => 'administrator'
+                    'danger' => 'administrator',
                 ],
 
             ],
@@ -131,7 +131,7 @@ return [
             'list' => [
                 'related_to' => 'Related to',
                 'blocked_by' => 'Blocked by',
-                'duplicate_of' => 'Duplicate of'
+                'duplicate_of' => 'Duplicate of',
             ],
 
             // Types colors

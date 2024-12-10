@@ -1,7 +1,11 @@
 #!/bin/bash
-php artisan queue:work &
 php artisan migrate
-php artisan db:seed
+npx update-browserslist-db@latest
 npm run build
-php artisan optimize:clear
-php artisan serve --host 0.0.0.0
+php artisan key:generate
+php artisan storage:link
+# php artisan optimize:clear
+# php artisan optimize
+# php artisan view:cache
+php artisan queue:work
+php artisan serve --host=192.168.1.60

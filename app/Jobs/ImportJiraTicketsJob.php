@@ -9,7 +9,6 @@ use App\Models\Ticket;
 use App\Models\TicketPriority;
 use App\Models\TicketStatus;
 use App\Models\TicketType;
-use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -22,6 +21,7 @@ class ImportJiraTicketsJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $tickets;
+
     private $user;
 
     /**
@@ -42,25 +42,25 @@ class ImportJiraTicketsJob implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->tickets && sizeof($this->tickets)) {
+        if ($this->tickets && count($this->tickets)) {
             foreach ($this->tickets as $ticket) {
                 $projectDetails = $ticket->fields->project;
                 $ticketData = $ticket->fields;
 
                 $project = Project::where('name', $projectDetails->name)->first();
-                if (!$project) {
+                if (! $project) {
                     $project = Project::create([
                         'name' => $projectDetails->name,
-                        'description' => __('Project imported from Jira, project key:') . $projectDetails->key,
+                        'description' => __('Project imported from Jira, project key:').$projectDetails->key,
                         'status_id' => ProjectStatus::where('is_default', true)->first()->id,
                         'owner_id' => $this->user->id,
-                        'ticket_prefix' => $projectDetails->key
+                        'ticket_prefix' => $projectDetails->key,
                     ]);
 
                     ProjectUser::create([
                         'project_id' => $project->id,
                         'user_id' => $this->user->id,
-                        'role' => config('system.projects.affectations.roles.can_manage')
+                        'role' => config('system.projects.affectations.roles.can_manage'),
                     ]);
                 }
 

@@ -1,1 +1,1 @@
-docker build --network=host -t devaslanphp/helper:latest .
+docker build --network=host -t drogaconsulting/project-management:latest .

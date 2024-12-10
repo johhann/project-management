@@ -6,7 +6,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use App\Settings\GeneralSettings;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -15,20 +14,20 @@ class PermissionsSeeder extends Seeder
     private array $modules = [
         'permission', 'project', 'project status', 'role', 'ticket',
         'ticket priority', 'ticket status', 'ticket type', 'user',
-        'activity', 'sprint'
+        'activity', 'sprint',
     ];
 
     private array $pluralActions = [
-        'List'
+        'List',
     ];
 
     private array $singularActions = [
-        'View', 'Create', 'Update', 'Delete'
+        'View', 'Create', 'Update', 'Delete',
     ];
 
     private array $extraPermissions = [
         'Manage general settings', 'Import from Jira',
-        'List timesheet data', 'View timesheet dashboard'
+        'List timesheet data', 'View timesheet dashboard',
     ];
 
     private string $defaultRole = 'Default role';
@@ -46,25 +45,25 @@ class PermissionsSeeder extends Seeder
             $singular = $module;
             foreach ($this->pluralActions as $action) {
                 Permission::firstOrCreate([
-                    'name' => $action . ' ' . $plural
+                    'name' => $action.' '.$plural,
                 ]);
             }
             foreach ($this->singularActions as $action) {
                 Permission::firstOrCreate([
-                    'name' => $action . ' ' . $singular
+                    'name' => $action.' '.$singular,
                 ]);
             }
         }
 
         foreach ($this->extraPermissions as $permission) {
             Permission::firstOrCreate([
-                'name' => $permission
+                'name' => $permission,
             ]);
         }
 
         // Create default role
         $role = Role::firstOrCreate([
-            'name' => $this->defaultRole
+            'name' => $this->defaultRole,
         ]);
         $settings = app(GeneralSettings::class);
         $settings->default_role = $role->id;

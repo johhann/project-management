@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use App\Notifications\TicketCommented;
-use App\Notifications\TicketCreated;
-use App\Notifications\TicketStatusUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,9 +13,8 @@ class TicketComment extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'ticket_id', 'content'
+        'user_id', 'ticket_id', 'content',
     ];
-
 
     public static function boot()
     {

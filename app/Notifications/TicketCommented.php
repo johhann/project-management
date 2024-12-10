@@ -20,7 +20,7 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param TicketComment $ticket
+     * @param  TicketComment  $ticket
      * @return void
      */
     public function __construct(TicketComment $ticketComment)
@@ -31,7 +31,7 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -42,7 +42,7 @@ class TicketCommented extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -53,7 +53,7 @@ class TicketCommented extends Notification implements ShouldQueue
                     'A new comment has been added to the ticket :ticket by :name.',
                     [
                         'ticket' => $this->ticketComment->ticket->name,
-                        'name' => $this->ticketComment->user->name
+                        'name' => $this->ticketComment->user->name,
                     ]
                 )
             )
@@ -71,17 +71,17 @@ class TicketCommented extends Notification implements ShouldQueue
                 __(
                     'Ticket :ticket commented',
                     [
-                        'ticket' => $this->ticketComment->ticket->name
+                        'ticket' => $this->ticketComment->ticket->name,
                     ]
                 )
             )
             ->icon('heroicon-o-ticket')
-            ->body(fn() => __('by :name', ['name' => $this->ticketComment->user->name]))
+            ->body(fn () => __('by :name', ['name' => $this->ticketComment->user->name]))
             ->actions([
                 Action::make('view')
                     ->link()
                     ->icon('heroicon-s-eye')
-                    ->url(fn() => route('filament.resources.tickets.share', $this->ticketComment->ticket->code)),
+                    ->url(fn () => route('filament.resources.tickets.share', $this->ticketComment->ticket->code)),
             ])
             ->getDatabaseMessage();
     }

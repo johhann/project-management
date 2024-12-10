@@ -10,23 +10,23 @@ class ActivitySeeder extends Seeder
     private array $data = [
         [
             'name' => 'Programming',
-            'description' => 'Programming related activities'
+            'description' => 'Programming related activities',
         ],
         [
             'name' => 'Testing',
-            'description' => 'Testing related activities'
+            'description' => 'Testing related activities',
         ],
         [
             'name' => 'Learning',
-            'description' => 'Activities related to learning and training'
+            'description' => 'Activities related to learning and training',
         ],
         [
             'name' => 'Research',
-            'description' => 'Activities related to research'
+            'description' => 'Activities related to research',
         ],
         [
             'name' => 'Other',
-            'description' => 'Other activities'
+            'description' => 'Other activities',
         ],
     ];
 

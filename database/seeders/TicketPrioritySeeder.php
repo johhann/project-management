@@ -11,17 +11,17 @@ class TicketPrioritySeeder extends Seeder
         [
             'name' => 'Low',
             'color' => '#008000',
-            'is_default' => false
+            'is_default' => false,
         ],
         [
             'name' => 'Normal',
             'color' => '#CECECE',
-            'is_default' => true
+            'is_default' => true,
         ],
         [
             'name' => 'High',
             'color' => '#ff0000',
-            'is_default' => false
+            'is_default' => false,
         ],
     ];
 

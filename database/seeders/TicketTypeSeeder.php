@@ -12,19 +12,19 @@ class TicketTypeSeeder extends Seeder
             'name' => 'Task',
             'icon' => 'heroicon-o-check-circle',
             'color' => '#00FFFF',
-            'is_default' => true
+            'is_default' => true,
         ],
         [
             'name' => 'Evolution',
             'icon' => 'heroicon-o-clipboard-list',
             'color' => '#008000',
-            'is_default' => false
+            'is_default' => false,
         ],
         [
             'name' => 'Bug',
             'icon' => 'heroicon-o-x',
             'color' => '#ff0000',
-            'is_default' => false
+            'is_default' => false,
         ],
     ];
 

@@ -73,7 +73,7 @@ class ProjectResource extends Resource
                                                     ->maxLength(255),
 
                                                 Forms\Components\TextInput::make('ticket_prefix')
-                                                    ->label(__('Ticket prefix'))
+                                                    ->label(__('Task prefix'))
                                                     ->maxLength(3)
                                                     ->columnSpan(2)
                                                     ->unique(Project::class, column: 'ticket_prefix', ignoreRecord: true)

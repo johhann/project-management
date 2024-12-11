@@ -20,12 +20,17 @@ class TicketPriorityResource extends Resource
 
     protected static function getNavigationLabel(): string
     {
-        return __('Ticket priorities');
+        return __('Task priorities');
     }
 
     public static function getPluralLabel(): ?string
     {
         return static::getNavigationLabel();
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Task Priority');
     }
 
     protected static function getNavigationGroup(): ?string

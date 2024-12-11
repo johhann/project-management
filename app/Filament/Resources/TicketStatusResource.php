@@ -20,12 +20,17 @@ class TicketStatusResource extends Resource
 
     protected static function getNavigationLabel(): string
     {
-        return __('Ticket statuses');
+        return __('Task statuses');
     }
 
     public static function getPluralLabel(): ?string
     {
         return static::getNavigationLabel();
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Task Status');
     }
 
     protected static function getNavigationGroup(): ?string

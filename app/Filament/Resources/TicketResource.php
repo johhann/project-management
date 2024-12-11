@@ -30,12 +30,17 @@ class TicketResource extends Resource
 
     protected static function getNavigationLabel(): string
     {
-        return __('Tickets');
+        return __('Tasks');
     }
 
     public static function getPluralLabel(): ?string
     {
         return static::getNavigationLabel();
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('Task');
     }
 
     protected static function getNavigationGroup(): ?string
@@ -83,7 +88,7 @@ class TicketResource extends Resource
                                     ->default(fn () => request()->get('project'))
                                     ->required(),
                                 Forms\Components\Select::make('epic_id')
-                                    ->label(__('Epic'))
+                                    ->label(__('Sprint'))
                                     ->searchable()
                                     ->reactive()
                                     ->options(function ($get, $set) {
@@ -94,13 +99,13 @@ class TicketResource extends Resource
                                     ->columnSpan(2)
                                     ->schema([
                                         Forms\Components\TextInput::make('code')
-                                            ->label(__('Ticket code'))
+                                            ->label(__('Task code'))
                                             ->visible(fn ($livewire) => ! ($livewire instanceof CreateRecord))
                                             ->columnSpan(2)
                                             ->disabled(),
 
                                         Forms\Components\TextInput::make('name')
-                                            ->label(__('Ticket name'))
+                                            ->label(__('Task name'))
                                             ->required()
                                             ->columnSpan(
                                                 fn ($livewire) => ! ($livewire instanceof CreateRecord) ? 10 : 12
@@ -109,14 +114,14 @@ class TicketResource extends Resource
                                     ]),
 
                                 Forms\Components\Select::make('owner_id')
-                                    ->label(__('Ticket owner'))
+                                    ->label(__('Task owner'))
                                     ->searchable()
                                     ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                                     ->default(fn () => auth()->user()->id)
                                     ->required(),
 
                                 Forms\Components\Select::make('responsible_id')
-                                    ->label(__('Ticket responsible'))
+                                    ->label(__('Tasks responsible'))
                                     ->searchable()
                                     ->options(fn () => User::all()->pluck('name', 'id')->toArray()),
 
@@ -125,7 +130,7 @@ class TicketResource extends Resource
                                     ->columnSpan(2)
                                     ->schema([
                                         Forms\Components\Select::make('status_id')
-                                            ->label(__('Ticket status'))
+                                            ->label(__('Task status'))
                                             ->searchable()
                                             ->options(function ($get) {
                                                 $project = Project::where('id', $get('project_id'))->first();
@@ -158,14 +163,14 @@ class TicketResource extends Resource
                                             ->required(),
 
                                         Forms\Components\Select::make('type_id')
-                                            ->label(__('Ticket type'))
+                                            ->label(__('Task type'))
                                             ->searchable()
                                             ->options(fn () => TicketType::all()->pluck('name', 'id')->toArray())
                                             ->default(fn () => TicketType::where('is_default', true)->first()?->id)
                                             ->required(),
 
                                         Forms\Components\Select::make('priority_id')
-                                            ->label(__('Ticket priority'))
+                                            ->label(__('Task priority'))
                                             ->searchable()
                                             ->options(fn () => TicketPriority::all()->pluck('name', 'id')->toArray())
                                             ->default(fn () => TicketPriority::where('is_default', true)->first()?->id)
@@ -174,7 +179,7 @@ class TicketResource extends Resource
                             ]),
 
                         Forms\Components\RichEditor::make('content')
-                            ->label(__('Ticket content'))
+                            ->label(__('Task content'))
                             ->required()
                             ->columnSpan(2),
 
@@ -217,7 +222,7 @@ class TicketResource extends Resource
                                             ->default(fn () => config('system.tickets.relations.default')),
 
                                         Forms\Components\Select::make('relation_id')
-                                            ->label(__('Related ticket'))
+                                            ->label(__('Related task'))
                                             ->required()
                                             ->searchable()
                                             ->columnSpan(2)
@@ -246,7 +251,7 @@ class TicketResource extends Resource
         }
         $columns = array_merge($columns, [
             Tables\Columns\TextColumn::make('name')
-                ->label(__('Ticket name'))
+                ->label(__('Task name'))
                 ->sortable()
                 ->searchable(),
 
@@ -295,7 +300,7 @@ class TicketResource extends Resource
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('created_at')
-                ->label(__('Created at'))
+                ->label(__('Date'))
                 ->dateTime()
                 ->sortable()
                 ->searchable(),

@@ -180,7 +180,6 @@ class TicketResource extends Resource
 
                         Forms\Components\RichEditor::make('content')
                             ->label(__('Task content'))
-                            ->required()
                             ->columnSpan(2),
 
                         Forms\Components\Grid::make()
